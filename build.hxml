@@ -1,0 +1,5 @@
+--library heaps
+--class-path src
+--main Main
+--js bin/game.js
+-D windowSize=640x320
