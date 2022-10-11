@@ -1,23 +1,20 @@
 package objects;
 
+import differ.shapes.Polygon;
 import h2d.col.Point;
 import mech.Movable;
 import h2d.Object;
-
-enum MoveDirection {
-	Left;
-	Right;
-	Up;
-	Down;
-}
+import hxd.Math;
 
 class MovingObject extends Object implements Movable {
+		public var col : Polygon;
 		public var velocity : Point;
 		public var maxVelocity : Int;
     public function new(?parent:Object) {
         super(parent);
 				this.velocity = new Point(0,0);
 				this.maxVelocity = 100;
+				this.col = Polygon.rectangle(this.x,this.y,32,32,true);
     }
 
     public function moveSelf(moveKeyFlag:Int, acceleration:Float, delta:Float):Void {
@@ -60,5 +57,9 @@ class MovingObject extends Object implements Movable {
 			
 			this.x += this.velocity.x * delta;
 			this.y += this.velocity.y * delta;
+
+			this.x = Math.clamp(this.x, 0, 640-32);
+			this.y = Math.clamp(this.y, 0, 320-32);
+			this.col = Polygon.rectangle(this.x, this.y, 32,32,true);
     }
 }

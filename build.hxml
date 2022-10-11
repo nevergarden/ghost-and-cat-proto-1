@@ -1,4 +1,5 @@
 --library heaps
+--library differ
 --class-path src
 --main Main
 --js bin/game.js

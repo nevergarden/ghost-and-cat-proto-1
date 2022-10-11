@@ -1,6 +1,9 @@
 package mech;
 
+import differ.shapes.Polygon;
+
 
 interface Movable {
-    public function moveSelf(moveKeyFlag:Int, accel:Float, dt:Float):Void;
+	public var col:Polygon;
+  public function moveSelf(moveKeyFlag:Int, accel:Float, dt:Float):Void;
 }

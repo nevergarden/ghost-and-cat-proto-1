@@ -1,9 +1,10 @@
 package objects;
 
+import mech.Collidable;
 import h2d.Graphics;
 import h2d.Object;
 
-class Cat extends MovingObject {
+class Cat extends MovingObject implements Collidable {
 	var sprite:Graphics;
 	public function new(?parent:Object) {
 		super(parent);
