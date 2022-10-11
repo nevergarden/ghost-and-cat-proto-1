@@ -1,5 +1,6 @@
 package mech;
 
+
 interface Movable {
-    public function moveTo():Void;
+    public function moveSelf(moveKeyFlag:Int, accel:Float, dt:Float):Void;
 }

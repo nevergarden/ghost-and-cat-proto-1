@@ -6,10 +6,10 @@ import objects.*;
 
 class Main extends hxd.App {
 	var moveKeyFlag : Int = 0;
-	var speed : Float = 100;
+	var playerAccel : Float = 100;
 	var cat : Cat;
 	override function init() {
-		s2d.scaleMode = ScaleMode.LetterBox(640, 320);
+		s2d.scaleMode = ScaleMode.LetterBox(640, 320, true);
 		engine.backgroundColor = 0xFF202020;
 		var g = new Ghost(s2d);
 		g.x = 0;
@@ -57,24 +57,8 @@ class Main extends hxd.App {
 		});
 	}
 
-	function movePlayer(delta : Float) : Void {
-		var keyCount : Int = 0;
-		if(moveKeyFlag & 0x1 != 0) keyCount+=1;
-		if(moveKeyFlag & 0x2 != 0) keyCount+=1;
-		if(moveKeyFlag & 0x4 != 0) keyCount+=1;
-		if(moveKeyFlag & 0x8 != 0) keyCount+=1;
-
-		if(keyCount == 0)
-			return;
-		var floatingSpeed = speed / keyCount;
-		if(moveKeyFlag & 0x1 != 0) cat.x += floatingSpeed * delta;
-		if(moveKeyFlag & 0x2 != 0) cat.x -= floatingSpeed * delta;
-		if(moveKeyFlag & 0x4 != 0) cat.y -= floatingSpeed * delta;
-		if(moveKeyFlag & 0x8 != 0) cat.y += floatingSpeed * delta;
-	}
-
 	override function update(dt:Float) {
-		movePlayer(dt);
+		cat.moveSelf(moveKeyFlag, playerAccel, dt);
 	}
 
 	static function main() {
